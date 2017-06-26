@@ -8,12 +8,8 @@ import unittest
 import xmlrunner
 from selenium import webdriver
 from sauceclient import SauceClient
-# it's best to remove the hardcoded defaults and always get these values
-# from environment variables but harcoding for test completion
 USERNAME = os.environ['SAUCE_USERNAME']
 ACCESS_KEY = os.environ['SAUCE_ACCESS_KEY']
-# USERNAME = "norbak"
-# ACCESS_KEY = "c599d22a-51aa-4655-9348-5c1e48ea0698"
 email_text = "devops@alation.com"
 password_text = "hHe3k7Lla7zuvKqhbemG"
 sauce = SauceClient(USERNAME, ACCESS_KEY)
@@ -44,11 +40,11 @@ class AlationSmokeTest(unittest.TestCase):
             desired_capabilities=self.desired_capabilities,
             command_executor=sauce_url % (USERNAME, ACCESS_KEY)
         )
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(10)
+        
     def test_login(self):
         self.driver.get('https://alfredo.trialalation.com')
         assert "Alation" in self.driver.title
-        
         email = self.driver.find_element_by_id("email")
         email.send_keys(email_text)
         password = self.driver.find_element_by_id('password')
@@ -56,6 +52,7 @@ class AlationSmokeTest(unittest.TestCase):
         self.driver.find_element_by_xpath("//button[contains(.,'Sign In')]").click()
         self.driver.implicitly_wait(10)
         assert "Welcome to Alation | Alation" in self.driver.title
+        
     def tearDown(self):
         print("Link to your job: https://saucelabs.com/jobs/%s" % self.driver.session_id)
         try:
