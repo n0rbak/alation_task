@@ -5,6 +5,7 @@ import os
 import sys
 import new
 import unittest
+import xmlrunner
 from selenium import webdriver
 from sauceclient import SauceClient
 # it's best to remove the hardcoded defaults and always get these values
@@ -66,5 +67,5 @@ class AlationSmokeTest(unittest.TestCase):
             self.driver.quit()
  
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports-alation'))
     
