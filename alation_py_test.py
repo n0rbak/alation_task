@@ -10,10 +10,10 @@ from selenium import webdriver
 from sauceclient import SauceClient
 # it's best to remove the hardcoded defaults and always get these values
 # from environment variables but harcoding for test completion
-# USERNAME = os.environ['USERNAME']
-# ACCESS_KEY = os.environ['ACCESS_KEY']
-USERNAME = "norbak"
-ACCESS_KEY = "c599d22a-51aa-4655-9348-5c1e48ea0698"
+USERNAME = os.environ['USERNAME']
+ACCESS_KEY = os.environ['ACCESS_KEY']
+# USERNAME = "norbak"
+# ACCESS_KEY = "c599d22a-51aa-4655-9348-5c1e48ea0698"
 email_text = "devops@alation.com"
 password_text = "hHe3k7Lla7zuvKqhbemG"
 sauce = SauceClient(USERNAME, ACCESS_KEY)
